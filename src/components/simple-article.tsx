@@ -1,7 +1,7 @@
-import { Article } from "../types/article";
+import { ArticleType } from "../types/article";
 
 type ArticleProps = {
-  article: Article;
+  article: ArticleType;
 };
 
 export const SimpleArticle = ({ article }: ArticleProps) => {

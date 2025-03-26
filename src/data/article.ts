@@ -1,6 +1,6 @@
-import { Article } from "../types/article";
+import { ArticleType } from "../types/article";
 
-export const article1: Article = {
+export const article1: ArticleType = {
   id: 1,
   title: "Article 1",
   author: "John Doe",
