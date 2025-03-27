@@ -1,8 +1,7 @@
 import useQueryParam from "@/hooks/use-search-params";
 
 function getSearchParams() {
-  const searchParams = new URLSearchParams(window.location.search);
-  return searchParams;
+  return new URLSearchParams(window.location.search);
 }
 
 const DEFAULT_LIMIT = 10;
