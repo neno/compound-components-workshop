@@ -6,6 +6,7 @@ import { Tabs, Tab } from "./components/tabs";
 import { tabs } from "./data/tabs";
 import { ThemeContextProvider } from "./context/theme-context";
 import { Layout } from "./components/layout";
+import { Pagination } from "./components/pagination";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               )}
             />
           </div>
+          <Pagination totalItems={100} />
         </div>
       </Layout>
     </ThemeContextProvider>
