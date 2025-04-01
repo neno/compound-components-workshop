@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
@@ -11,4 +11,10 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-});
+  test: {
+    // 👋 add the line below to add jsdom to vite
+    environment: "happy-dom",
+    // hey! 👋 over here
+    globals: true,
+  },
+} as UserConfig);
