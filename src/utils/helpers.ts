@@ -45,7 +45,7 @@ export function getUrlForPage(page: number, limit: number) {
 }
 
 export function isCurrentPage(page: number, offset: number, limit: number) {
-  return page === Math.floor(offset / limit);
+  return page === Math.ceil(offset / limit);
 }
 
 export function resetPagination(limit: number) {

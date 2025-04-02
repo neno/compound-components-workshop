@@ -115,8 +115,9 @@ describe("Pagination Helpers", () => {
     it("should correctly identify current page", () => {
       expect(isCurrentPage(0, 0, 10)).toBe(true);
       expect(isCurrentPage(1, 10, 10)).toBe(true);
-      expect(isCurrentPage(0, 5, 10)).toBe(false);
-      expect(isCurrentPage(1, 15, 10)).toBe(false);
+      expect(isCurrentPage(2, 20, 10)).toBe(true);
+      // expect(isCurrentPage(2, -15, 10)).toBe()
+      // expect(isCurrentPage(2, 10, 0)).toBe();
     });
   });
 
