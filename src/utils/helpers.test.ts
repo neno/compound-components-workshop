@@ -12,6 +12,8 @@ import {
   resetPagination,
 } from "./helpers";
 
+// TODO: Add tests for "unhappy" paths
+
 // Mock window.location
 const mockLocation = new URL("http://localhost:3000");
 vi.stubGlobal("window", {
