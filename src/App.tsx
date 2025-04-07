@@ -4,13 +4,13 @@ import { List, Row } from "./components/list";
 import { products } from "./data/products";
 import { Tabs, Tab } from "./components/tabs";
 import { tabs } from "./data/tabs";
-import { ThemeContextProvider } from "./context/theme-context";
 import { Layout } from "./components/layout";
 import { Pagination } from "./components/pagination";
-
+import { TypesafePagination } from "./components/typesafe-pagination";
+import { Providers } from "./components/providers";
 function App() {
   return (
-    <ThemeContextProvider>
+    <Providers>
       <Layout>
         <div className="container p-4 mx-auto">
           <div className="grid gap-8">
@@ -38,9 +38,11 @@ function App() {
             />
           </div>
           <Pagination totalItems={100} />
+          <hr />
+          <TypesafePagination />
         </div>
       </Layout>
-    </ThemeContextProvider>
+    </Providers>
   );
 }
 

@@ -39,6 +39,7 @@ describe("Pagination Helpers", () => {
     it("should return true when offset is greater than 0", () => {
       expect(hasPrevPage(10)).toBe(true);
       expect(hasPrevPage(1)).toBe(true);
+      expect(() => hasPrevPage("abc")).toThrowError("Offset must be a number"); // -> ZsuZsa
     });
 
     it("should return false when offset is 0 or negative", () => {
