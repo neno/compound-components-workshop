@@ -22,7 +22,7 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     parseAsInteger.withDefault(DEFAULT_LIMIT)
   );
 
-  const hasPrevPage = (offset: number): boolean => {
+  const hasPrevPage = (): boolean => {
     return offset > 0;
   };
 
@@ -31,7 +31,7 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
   };
 
   const getPrevUrl = (): string => {
-    if (!hasPrevPage(offset)) return "";
+    if (!hasPrevPage()) return "";
 
     return setSearchParams({
       offset: (offset - limit).toString(),
@@ -64,6 +64,8 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
   };
 
   return {
+    hasPrevPage,
+    hasNextPage,
     offset,
     limit,
     prevUrl: getPrevUrl(),
