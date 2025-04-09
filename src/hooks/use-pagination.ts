@@ -1,4 +1,5 @@
 import { parseAsInteger, useQueryState } from "nuqs";
+import { paginationSchema } from "@/schema/pagination.schema";
 
 export function getSearchParams(): URLSearchParams {
   return new URLSearchParams(window.location.search);
@@ -13,14 +14,41 @@ export function setSearchParams(params: Record<string, string>): string {
 }
 
 export function usePagination(total: number, DEFAULT_LIMIT: number) {
-  const [offset, setOffset] = useQueryState(
+  const [rawOffset, setRawOffset] = useQueryState(
     "offset",
     parseAsInteger.withDefault(0)
   );
-  const [limit, setLimit] = useQueryState(
+  const [rawLimit, setRawLimit] = useQueryState(
     "limit",
     parseAsInteger.withDefault(DEFAULT_LIMIT)
   );
+
+  // Validate with Zod schema
+  const validationResult = paginationSchema.safeParse({
+    offset: rawOffset,
+    limit: rawLimit,
+  });
+
+  // Use validated values or defaults
+  const offset = validationResult.success ? validationResult.data.offset : 0;
+  const limit = validationResult.success
+    ? validationResult.data.limit
+    : DEFAULT_LIMIT;
+
+  // Wrapper functions to ensure validation on state changes
+  const setOffset = (newOffset: number) => {
+    const result = paginationSchema.safeParse({ offset: newOffset, limit });
+    if (result.success) {
+      setRawOffset(result.data.offset);
+    }
+  };
+
+  const setLimit = (newLimit: number) => {
+    const result = paginationSchema.safeParse({ offset, limit: newLimit });
+    if (result.success) {
+      setRawLimit(result.data.limit);
+    }
+  };
 
   const hasPrevPage = (): boolean => {
     return offset > 0;
@@ -75,5 +103,8 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     isCurrentPage,
     setOffset,
     setLimit,
+    validationErrors: validationResult.success
+      ? null
+      : validationResult.error.format(),
   };
 }
