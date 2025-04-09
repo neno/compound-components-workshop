@@ -91,9 +91,25 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     return page === Math.ceil(offset / limit);
   };
 
+  const getUrlForFirstPage = (): string | undefined => {
+    if (offset === 0) return;
+    return getUrlForPage(0);
+  };
+
+  const getUrlForLastPage = (): string | undefined => {
+    if (!hasNextPage()) return;
+
+    const pages = getPageNumbers();
+    return getUrlForPage(pages[pages.length - 1]);
+  };
+
   const resetPagination = () => {
     setRawOffset(0);
     setRawLimit(DEFAULT_LIMIT);
+  };
+
+  const getCurrentPage = (): number => {
+    return Math.ceil(offset / limit);
   };
 
   return {
@@ -106,8 +122,11 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     pageNumbers: getPageNumbers(),
     urlForPage: getUrlForPage,
     isCurrentPage,
+    currentPage: getCurrentPage(),
     setOffset,
     setLimit,
+    firstPageUrl: getUrlForFirstPage(),
+    lastPageUrl: getUrlForLastPage(),
     resetPagination,
   };
 }
