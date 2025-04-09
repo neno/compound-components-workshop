@@ -91,6 +91,11 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     return page === Math.ceil(offset / limit);
   };
 
+  const resetPagination = () => {
+    setRawOffset(0);
+    setRawLimit(DEFAULT_LIMIT);
+  };
+
   return {
     hasPrevPage,
     hasNextPage,
@@ -103,8 +108,6 @@ export function usePagination(total: number, DEFAULT_LIMIT: number) {
     isCurrentPage,
     setOffset,
     setLimit,
-    validationErrors: validationResult.success
-      ? null
-      : validationResult.error.format(),
+    resetPagination,
   };
 }

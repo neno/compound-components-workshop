@@ -13,7 +13,7 @@ function App() {
     <Providers>
       <Layout>
         <div className="container p-4 mx-auto">
-          <div className="grid gap-8">
+          {/* <div className="grid gap-8">
             <div className="grid grid-cols-2">
               <SimpleArticle article={article1} />
               <div>PUT HERE COMPOUND ARTICLE</div>
@@ -38,7 +38,7 @@ function App() {
             />
           </div>
           <Pagination totalItems={100} />
-          <hr />
+          <hr /> */}
           <TypesafePagination />
         </div>
       </Layout>
